@@ -1,0 +1,15 @@
+# Sistema operacional
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*~
+
+# Rascunhos locais que nunca devem ser publicados
+rascunho/
+privado/
+*.local.md

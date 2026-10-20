@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\TermosUso.Dominio\TermosUso.Dominio.csproj" />
+    <ProjectReference Include="..\TermosUso.Aplicacao\TermosUso.Aplicacao.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Acompanha o binário para que a API consiga aplicar o schema na subida. -->
+    <Content Include="schema.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>

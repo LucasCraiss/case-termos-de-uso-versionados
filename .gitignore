@@ -13,3 +13,12 @@ desktop.ini
 rascunho/
 privado/
 *.local.md
+
+# .NET
+bin/
+obj/
+*.user
+[Dd]ebug/
+[Rr]elease/
+TestResults/
+*.received.*

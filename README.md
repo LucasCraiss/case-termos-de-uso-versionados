@@ -133,6 +133,31 @@ A estrutura de dados "mais correta" em memória era a errada na fronteira com o 
 
 ---
 
+## Implementação de referência
+
+Para quem quer ver as decisões acima em código: **[`implementacao-referencia/`](implementacao-referencia/)** é um projeto .NET + PostgreSQL que as implementa de verdade — escrito do zero para este repositório, não derivado de código de terceiros.
+
+```bash
+cd implementacao-referencia
+docker compose up -d
+dotnet test
+```
+
+O que ele demonstra, e onde:
+
+| Decisão do case | No código |
+|---|---|
+| Imutabilidade garantida pelo banco | [`schema.sql`](implementacao-referencia/src/TermosUso.Infraestrutura/schema.sql) — trigger que rejeita `UPDATE` no conteúdo |
+| No máximo uma versão vigente | o mesmo arquivo — índice único **parcial** |
+| Sanitização por allowlist na ingestão | [`SanitizadorDeTermo.cs`](implementacao-referencia/src/TermosUso.Aplicacao/SanitizadorDeTermo.cs) |
+| "Mudou de verdade" antes de publicar | [`ComparadorDeConteudo.cs`](implementacao-referencia/src/TermosUso.Aplicacao/ComparadorDeConteudo.cs) |
+| Uma regra de elegibilidade só | [`ElegibilidadeAceite.cs`](implementacao-referencia/src/TermosUso.Dominio/ElegibilidadeAceite.cs) |
+| As invariantes valem mesmo contra SQL direto | [`InvariantesDoBancoTestes.cs`](implementacao-referencia/tests/TermosUso.Testes/InvariantesDoBancoTestes.cs) |
+
+A suíte de invariantes ataca o banco **por fora do domínio**, com SQL cru: se a garantia fosse só a ausência de setter na entidade, nenhum desses testes provaria nada.
+
+---
+
 ## O que eu tiraria deste case
 
 Duas coisas, se tivesse que resumir em duas linhas:
